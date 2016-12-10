@@ -1,3 +1,26 @@
 body {
   background-color: grey;
 }
+
+ul {
+  margin: 0;
+  padding: 0;
+  width: 400px;
+  height: 400px;
+  border 1px solid #000;
+}
+
+li {
+  list-style-type: none;
+  float: left;
+  border: 1px solid #000;
+  box-sizing: border-box;
+}
+
+.lightgood {
+  background-color: yellow;
+}
+
+.lightbad {
+  background-color: red;
+}
