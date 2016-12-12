@@ -43,18 +43,15 @@
 
 var Game = Game || {};
 
-Game.sequenceGood   = [];
-Game.sequenceBad    = [];
-Game.gridBase       = 4;
+Game.sequenceGood       = [];
+Game.sequenceBad        = [];
+Game.gridBase           = 4;
 Game.sequenceGoodLength = 4;
-Game.sequenceBadLength = 2;
-Game.width          = 400;
-Game.score          = 0;
-Game.squares = [];
-Game.sequenceArray = [];
-
-
-// Game.eventListener = function();
+Game.sequenceBadLength  = 2;
+Game.width              = 400;
+Game.score              = 0;
+Game.squares            = [];
+Game.sequenceArray      = [];
 
 
 // create a 4X4 grid
@@ -74,66 +71,54 @@ Game.createGrid = function() {
   Game.chooseBadSequence();
 };
 
-// make squares slide up
-
 Game.chooseGoodSequence = function() {
-  for (var i = 0; i < Game.sequenceGoodLength; i++) {
-    var randomIndex = Game.randomSequence();
-    Game.sequenceGood.push(Game.sequenceArray[randomIndex]);
-    Game.sequenceArray.splice(randomIndex, 1);
-    console.log(Game.sequenceArray);
-    Game.lightUpGood();
-    console.log('Good', Game.sequenceGood);
-  }
+  setInterval(function() {
+    if ($('.lightgood').length < 4) {
+      var randomIndex = Game.randomSequence();
+      var randomGood = Game.sequenceGood.push(Game.sequenceArray[randomIndex]);
+      Game.sequenceArray.splice(randomIndex, 1);
+      $(Game.squares[randomGood]).attr('class', 'lightgood');
+      setTimeout(function() {
+        $(Game.squares[randomGood]).removeAttr('class', 'lightgood');
+      }, 2000);
+    }
+  }, 500);
+  Game.lightsClicked();
 };
 
 Game.chooseBadSequence = function() {
-  while (Game.sequenceBad.length < 2) {
-    setInterval(function(){
-      for (var i = 0; i < Game.sequenceBadLength; i++) {
-        var randomIndex = Game.randomSequence();
-        Game.sequenceBad.push(Game.sequenceArray[randomIndex]);
-        Game.sequenceArray.splice(randomIndex, 1);
-        console.log(Game.sequenceArray);
-        Game.lightUpBad();
-        console.log('Bad', Game.sequenceBad);
-        // Game.eventListener();
-      }
-    }, 2000);
-  }
+  setInterval(function() {
+    if ($('.lightbad').length < 2) {
+      var randomIndex = Game.randomSequence();
+      var randomBad = Game.sequenceBad.push(Game.sequenceArray[randomIndex]);
+      Game.sequenceArray.splice(randomIndex, 1);
+      $(Game.squares[randomBad]).attr('class', 'lightbad');
+      setTimeout(function() {
+        $(Game.squares[randomBad]).removeAttr('class', 'lightbad');
+      }, 2000);
+    }
+  }, 500);
+  Game.lightsClicked();
 };
 
 Game.randomSequence = function() {
   return Math.floor(Math.random() * Game.sequenceArray.length);
 };
 
-Game.lightUpGood = function() {
-  for (var i = 0; i < Game.sequenceGood.length; i++) {
-    Game.squares[Game.sequenceGood[i]].setAttribute('class', 'lightgood');
-  }
-  Game.lightsClicked();
 
-};
-
-Game.lightUpBad = function() {
-  for (var i = 0; i < Game.sequenceBad.length; i++) {
-    Game.squares[Game.sequenceBad[i]].setAttribute('class', 'lightbad');
-  }
-
-  Game.lightsClicked();
-
-};
-
-// function slideUp() {
-//   for (var i = 0; i < $('.lightgood').length + $('.lightbad').length; i++) {
-//     Game.squares[Game.sequenceGood[i]].slideUp(500);
-//     Game.squares[Game.sequenceBad[i]].slide(500);
-//   }
+// if ($('timer').val() =< 5){
+//   $('.timertext').css('color', 'red');   see below for flash
+// } else {
+//   $('.timertext').css('color', '#8899a6');
 // }
 
-// event listeners - if x clicked scorecounter++ if y clicked scorecounter-5
-// Game.addListeners = function() {
 
+// Game.lightUpBad = function() {
+//   for (var i = 0; i < Game.sequenceBad.length; i++) {
+//     Game.squares[Game.sequenceBad[i]].setAttribute('class', 'lightbad');
+//   }
+//   Game.lightsClicked();
+// };
 
 Game.lightsClicked = function() {
   for (var i = 0; i < Game.squares.length; i++) {
@@ -141,15 +126,12 @@ Game.lightsClicked = function() {
   }
 };
 
-// Game.lightsClicked();
-
-
 function goodOrBad() {
   var display = document.querySelector('#score-counter');
   console.log('clicked');
   if (this.className === 'lightgood') {
     Game.score+=2;
-    this.removeAttribute('class', 'lightgood');
+    $(this.removeAttribute('class', 'lightgood'));
   } else if (this.className === 'lightbad') {
     Game.score-=5;
     this.removeAttribute('class', 'lightbad');
@@ -160,38 +142,9 @@ function goodOrBad() {
 }
 
 
-// refill array
-
-// function refillArray() {
-// while (Game.sequenceGood.length < Game.sequenceGoodLength.length) {
-//   var randomIndex = Game.randomSequence()[0];
-//   Game.sequenceGood.push(Game.sequenceArray[randomIndex]);
-//   Game.sequenceArray.splice(randomIndex, 1);
-//   console.log(Game.sequenceArray);
-//   Game.lightUpGood();
-// }
-// }
-
-// remove the attribute
-// $('.lightgood').fadeOut('swing', function () {
-// function timeOut() {
-//       $('.lightgood').setTimeout(function() {
-//           Game.sequenceBad.removeAttribute();
-//         }
-//       });
-
-
-
-//
-//
-
 Game.start = function() {
   $('#start').on('click', Game.createGrid);
 };
 
-// Game.start = function() {
-//   Game.createGrid();
-//
-// };
 
 document.addEventListener('DOMContentLoaded', Game.start);
