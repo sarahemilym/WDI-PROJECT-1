@@ -37,6 +37,9 @@
 
 // display timer, when timer gets to 0 alert that round is over
 
+// $(start);
+//
+// function start() {
 
 var Game = Game || {};
 
@@ -53,6 +56,7 @@ Game.sequenceArray = [];
 
 // Game.eventListener = function();
 
+
 // create a 4X4 grid
 Game.createGrid = function() {
   var body = document.getElementsByTagName('body')[0];
@@ -65,11 +69,12 @@ Game.createGrid = function() {
     grid.appendChild(square);
     Game.sequenceArray.push(i);
   }
-  Game.squares = document.getElementsByTagName('li');
+  Game.squares = $('li');
   Game.chooseGoodSequence();
   Game.chooseBadSequence();
 };
 
+// make squares slide up
 
 Game.chooseGoodSequence = function() {
   for (var i = 0; i < Game.sequenceGoodLength; i++) {
@@ -79,20 +84,22 @@ Game.chooseGoodSequence = function() {
     console.log(Game.sequenceArray);
     Game.lightUpGood();
     console.log('Good', Game.sequenceGood);
-    // Game.eventListener();
   }
 };
 
 Game.chooseBadSequence = function() {
-  for (var i = 0; i < Game.sequenceBadLength; i++) {
-
-    var randomIndex = Game.randomSequence();
-    Game.sequenceBad.push(Game.sequenceArray[randomIndex]);
-    Game.sequenceArray.splice(randomIndex, 1);
-    console.log(Game.sequenceArray);
-    Game.lightUpBad();
-    console.log('Bad', Game.sequenceBad);
-    // Game.eventListener();
+  while (Game.sequenceBad.length < 2) {
+    setInterval(function(){
+      for (var i = 0; i < Game.sequenceBadLength; i++) {
+        var randomIndex = Game.randomSequence();
+        Game.sequenceBad.push(Game.sequenceArray[randomIndex]);
+        Game.sequenceArray.splice(randomIndex, 1);
+        console.log(Game.sequenceArray);
+        Game.lightUpBad();
+        console.log('Bad', Game.sequenceBad);
+        // Game.eventListener();
+      }
+    }, 2000);
   }
 };
 
@@ -105,6 +112,7 @@ Game.lightUpGood = function() {
     Game.squares[Game.sequenceGood[i]].setAttribute('class', 'lightgood');
   }
   Game.lightsClicked();
+
 };
 
 Game.lightUpBad = function() {
@@ -113,7 +121,15 @@ Game.lightUpBad = function() {
   }
 
   Game.lightsClicked();
+
 };
+
+// function slideUp() {
+//   for (var i = 0; i < $('.lightgood').length + $('.lightbad').length; i++) {
+//     Game.squares[Game.sequenceGood[i]].slideUp(500);
+//     Game.squares[Game.sequenceBad[i]].slide(500);
+//   }
+// }
 
 // event listeners - if x clicked scorecounter++ if y clicked scorecounter-5
 // Game.addListeners = function() {
@@ -125,48 +141,57 @@ Game.lightsClicked = function() {
   }
 };
 
-Game.lightsClicked();
+// Game.lightsClicked();
 
 
 function goodOrBad() {
   var display = document.querySelector('#score-counter');
   console.log('clicked');
   if (this.className === 'lightgood') {
-    Game.score++;
-    console.log(Game.score);
+    Game.score+=2;
+    this.removeAttribute('class', 'lightgood');
   } else if (this.className === 'lightbad') {
     Game.score-=5;
-    console.log(Game.score);
+    this.removeAttribute('class', 'lightbad');
   } else {
     Game.score--;
-    console.log(Game.score);
   }
   display.innerHTML = Game.score;
 }
 
 
-// remove the attribute
+// refill array
 
-
-// $('li').on('click', function() {
-//   var $lis = $(this).parent().children();
-//   for (var i = 0; i < lis.length; i++) {
-//     $($lis[i]).fadeOut(300*i+1);
-//   }
-// });
-
-// setTimeout(function() {
-//   for (var i = 0; i < Game.squares.length; i++) {
-// //   Game.squares[Game.sequenceGood[i]].removeAttribute('class', 'lightgood');
-// // }, 2000);
-//   Game.squares[Game.sequenceBad[i]].removeAttribute('class', 'lightgood');
-// }, 2000);
-// console.log('removed good');
+// function refillArray() {
+// while (Game.sequenceGood.length < Game.sequenceGoodLength.length) {
+//   var randomIndex = Game.randomSequence()[0];
+//   Game.sequenceGood.push(Game.sequenceArray[randomIndex]);
+//   Game.sequenceArray.splice(randomIndex, 1);
+//   console.log(Game.sequenceArray);
+//   Game.lightUpGood();
+// }
 // }
 
+// remove the attribute
+// $('.lightgood').fadeOut('swing', function () {
+// function timeOut() {
+//       $('.lightgood').setTimeout(function() {
+//           Game.sequenceBad.removeAttribute();
+//         }
+//       });
+
+
+
+//
+//
 
 Game.start = function() {
-  Game.createGrid();
-
+  $('#start').on('click', Game.createGrid);
 };
+
+// Game.start = function() {
+//   Game.createGrid();
+//
+// };
+
 document.addEventListener('DOMContentLoaded', Game.start);

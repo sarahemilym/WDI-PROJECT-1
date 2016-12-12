@@ -1,13 +1,9 @@
-body {
-  background-color: grey;
-}
-
 ul {
   margin: 0;
   padding: 0;
   width: 400px;
   height: 400px;
-  border 1px solid #000;
+  border: 1px solid #000;
 }
 
 li {
@@ -23,4 +19,8 @@ li {
 
 .lightbad {
   background-color: red;
+}
+
+button {
+  border: 1px solid black;
 }
