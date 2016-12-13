@@ -38,7 +38,19 @@ li {
   box-sizing: border-box;
 }
 
-.instructionbutton {
+.mainmenu {
+  background: #fafafa;
+  color: #7D7474;
+  border: none;
+  border-radius: 5px;
+  height: 21px;
+  width: 88px;
+  margin-top: 12px;
+  font-family: font-family: 'Bree Serif', serif;
+  font-size: 12px;
+}
+
+.instructionbutton, .mainMenu {
   margin: 20px;
   background: #7D7474;
   color: #fafafa;
@@ -47,10 +59,11 @@ li {
   border: none;
   font-size: 17px;
   height: 34px;
-  width: 155px;
-  margin-bottom: 2px;
+  width: 206px;
   border-radius: 8px;
   line-height: 10px;
+  display: block;
+  margin: 16px auto;
 }
 
 .container {
@@ -65,22 +78,24 @@ li {
   overflow: auto;
 }
 
-#mutebutton {
-  float: left;
-  margin: 26px;
+.instructions {
+    border-radius: 11px;
+    z-index: 998;
+    margin: 108px 0 0 94px;
+    width: 73%;
+    height: 55%;
+    position: absolute;
+    background: rgba(36, 27, 27, 0.8);
+    color: #fafafa;
+    font-size: 16px;
 }
 
-.instructions {
-  border: 1px solid black;
-  border-radius: 5px;
-  z-index: 998;
-  margin: 83px;
-  width: 73%;
-  height: 33%;
-  position: absolute;
-  top: 0;
-  background: rgba(51, 51, 51, 0.8);
-  color: white;
+.bluesquares {
+  color: #84E2DF;
+}
+
+.redsquares {
+  color: #D81159;
 }
 
 .nextLevelPrompt {
@@ -93,23 +108,39 @@ li {
   top: 0;
 }
 
-.gameOverPrompt {
+.nextLevelPrompt, .gameOverPrompt {
   z-index: 998;
-  margin: 83px;
-  width: 73%;
-  height: 33%;
+  margin: 159px 0 0 183px;
+  width: 49%;
+  height: 24%;
   position: absolute;
+  border-radius: 10px;
   top: 0;
-  background: rgba(80, 70, 70, 0.8);;
-  color: #CFC9C9;
-  border-radius: 5px;
+  background: rgba(80, 70, 70, 0.95);
+  /*color: #84E2DF;
+  font-size: 40px;
+  line-height: 86px;*/
 }
 
+.nextLevelPrompt h2 {
+  color: #84E2DF;
+  font-size: 40px;
+  line-height: 86px;
+}
+
+.gameOverPrompt h2 {
+  color: #D81159;
+  font-size: 40px;
+  line-height: 86px;
+  margin: 10px;
+}
+
+
 .start {
-  margin: 20px;
+  margin: 9px;
   background: #84E2DF;
   color: #7D7474;
-  padding: 10px 20px;
+  padding: 13px 20px;
   font-family: 'Bree Serif', serif;
   border: none;
   font-size: 32px;
@@ -121,10 +152,27 @@ li {
 }
 
 .playAgain {
-  border-radius: 5px;
-  background: #FFFBFB;
-  color: #A59D9D;
-  border: none;
+    border-radius: 5px;
+    color: #fafafa;
+    margin: -20px;
+    background: none;
+    font-size: 17px;
+    font-family: font-family: 'Bree Serif', serif;
+    height: 40px;
+    width: 116px;
+    border: 1px solid #fafafa;
+}
+
+.closeinstructions {
+    border-radius: 5px;
+    color: #fafafa;
+    margin: -20px;
+    background: none;
+    font-size: 12px;
+    font-family: font-family: 'Bree Serif', serif;
+    height: 27px;
+    width: 119px;
+    border: 1px solid #fafafa;
 }
 
 .score {
@@ -143,7 +191,7 @@ progress[value] {
   appearance: none;
 
   width: 250px;
-  height: 20px;
+  height: 11px;
 }
 
 /*progress::-moz-progress-bar {
@@ -152,24 +200,13 @@ background: #0063a6;
 
 progress[value]::-webkit-progress-bar {
   background-color: #eee;
-  border-radius: 2px;
+  border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
 }
 
 progress[value]::-webkit-progress-value {
-  background-color: red;
-
-  /*background-image:
-  /*-webkit-linear-gradient(-45deg,
-  transparent 33%, rgba(0, 0, 0, .1) 33%,
-  rgba(0,0, 0, .1) 66%, transparent 66%),*/
-  /*-webkit-linear-gradient(top,
-  rgba(255, 255, 255, .25),
-  rgba(0, 0, 0, .25)),
-  -webkit-linear-gradient(left, red, yellow, green);*/
-
-  border-radius: 5px;
-  /*background-size: 35px 20px, 100% 100%, 100% 100%;*/
+  background-color: #DD0000;
+  border-radius: 10px;
 }
 
 .goodie {

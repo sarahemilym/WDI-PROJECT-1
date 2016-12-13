@@ -39,6 +39,7 @@ Game.buildGame = function buildGame() {
   this.$ul    = $('<ul></ul>');
   this.$container.append(this.$ul);
   this.$ul.hide();
+  $('.mainMenu').hide();
   this.$scoreDisplay.hide();
   this.$nextLevel = $('.nextLevelPrompt').hide();
   this.$gameOver = $('.gameOverPrompt').hide();
@@ -47,7 +48,7 @@ Game.buildGame = function buildGame() {
   this.makeInstructions();
   this.makeStartButton();
   this.makeScore();
-  this.muteMusic();
+  this.toMenu();
 };
 
 Game.createGrid = function createGrid() {
@@ -85,7 +86,10 @@ Game.makeStartButton = function makeStartButton() {
 Game.start = function start() {
   this.$ul.show();
   this.$scoreDisplay.show();
+  this.$instructionbutton.hide();
   this.$startButton.hide();
+  $('.instructions').hide();
+  $('.mainMenu').show();
   this.$progress.show();
   this.placeSquares('goodie');
   this.placeSquares('baddie');
@@ -144,17 +148,19 @@ Game.checkType = function checkType() {
 
 Game.nextLevelPrompt = function nextLevelPrompt() {
   var $nextLevelPrompt = $('.nextLevelPrompt');
-  $nextLevelPrompt.fadeIn(700).delay(500).fadeOut(700);
+  $nextLevelPrompt.fadeIn(700).delay(1000).fadeOut(700);
   Game.nextLevel();
 };
 
 Game.gameOverPrompt = function gameOverPrompt() {
   var $gameOverPrompt = $('.gameOverPrompt');
   $gameOverPrompt.fadeIn(700);       //.delay(5000).fadeOut(700);
+  $('#playAgain').on('click', Game.mainMenu);
   Game.over();
-  $('#playAgain').on('click', function() {
-    $gameOverPrompt.fadeOut(200);
-  });
+
+  // () {
+  //   Game.mainMenu
+  // });
 };
 
 
@@ -190,13 +196,13 @@ Game.over = function over() {
   this.score       = 0;
   this.scoreNumber = 0;
   this.correct     = 10;
-  this.incorrect   = 50;
-  this.empty       = 10;
+  this.incorrect   = 5;
+  this.empty       = 2;
   this.level       = 1;
   this.$scoreDisplay.html('0');
   this.$progress.val(20);
   this.$progress.hide();
-  this.$startButton.show();
+  this.$startButton.hide();
   this.createGrid();
 };
 
@@ -220,6 +226,32 @@ Game.showInstructions = function showInstructions() {
 Game.hideInstructions = function hideInstructions() {
 
   $('#instructions').hide();
+};
+
+Game.mainMenu = function mainMenu() {
+  console.log('clicked');
+  $('.mainMenu').hide();
+  $('ul').hide();
+  Game.$progress.hide();
+  Game.$scoreDisplay.hide();
+  Game.$instructionbutton.show();
+  Game.$startButton.show();
+  Game.over();
+};
+
+Game.toMenu = function toMenu() {
+  $('.mainMenu').on('click', Game.mainMenu);
+};
+
+Game.mainMenu = function mainMenu() {
+  $('.mainMenu').hide();
+  $('.gameOverPrompt').hide();
+  $('ul').hide();
+  Game.$progress.hide();
+  Game.$scoreDisplay.hide();
+  Game.$instructionbutton.show();
+  Game.over();
+  $('.start').show();
 };
 
 Game.muteMusic = function muteMusic() {
