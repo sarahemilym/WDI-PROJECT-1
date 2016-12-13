@@ -43,7 +43,7 @@ Game.buildGame = function buildGame() {
   this.$scoreDisplay.hide();
   this.$nextLevel = $('.nextLevelPrompt').hide();
   this.$gameOver = $('.gameOverPrompt').hide();
-  $('#mutebutton').on('click', this.muteMusic);
+  // $('#mutebutton').on('click', this.muteMusic);
   this.createGrid();
   this.makeInstructions();
   this.makeStartButton();
@@ -129,7 +129,7 @@ Game.randomIndex = function randomIndex() {
 
 Game.checkType = function checkType() {
   if ($(this).hasClass('goodie')) {
-    new Audio('../sounds/ping.mp3').play();
+    // new Audio('../sounds/ping.mp3').play();
     Game.scoreNumber +=5;
     Game.score += Game.correct;
     $(this).removeClass('goodie');
