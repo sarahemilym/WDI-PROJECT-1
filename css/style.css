@@ -26,8 +26,55 @@ li {
   font-family: 'Bree Serif', serif;
   border: none;
   font-size: 20px;
-  }
+}
 
+.container {
+  width: 660px;
+  height: 620px;
+  position: relative;
+  border: 1px solid black;
+  margin: 0 auto;
+
+}
+
+.instructions {
+  border: 1px solid black;
+  z-index: 998;
+  margin: 83px;
+  width: 73%;
+  height: 33%;
+  position: absolute;
+  top: 0;
+}
+
+.nextLevelPrompt {
+  border: 1px solid black;
+  z-index: 998;
+  margin: 83px;
+  width: 73%;
+  height: 33%;
+  position: absolute;
+  top: 0;
+}
+
+.gameOverPrompt {
+  border: 1px solid black;
+  z-index: 998;
+  margin: 83px;
+  width: 73%;
+  height: 33%;
+  position: absolute;
+  top: 0;
+}
+/*.innerdiv {
+border: 3px solid black;
+background: red;
+width: 300px;
+position: absolute;
+z-index: 10;
+top: 30px;
+left: 50px
+}*/
 
 .start {
   margin: 20px;
@@ -45,7 +92,7 @@ progress {
 }
 
 .goodie {
-  background: #009ee2;
+  background-image: '../images/good.bacteria.png';
 }
 
 .baddie {

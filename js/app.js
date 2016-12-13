@@ -19,8 +19,8 @@ Game.setup = function setup() {
   this.baddies   = 2;
   this.goodies   = 4;
   this.score     = 0;
-  this.correct   = 10;
-  this.incorrect = 50;
+  this.correct   = 30;
+  this.incorrect = 20;
   this.empty     = 10;
   this.level     = 1;
   this.buildGame();
@@ -29,13 +29,16 @@ Game.setup = function setup() {
 Game.buildGame = function buildGame() {
   this.$body  = $('body');
   this.$title = $('<h1>ClickyNess</h1>');
-  this.$body.append(this.$title);
+  this.$body.prepend(this.$title);
+  this.$container = $('.container');
   this.$instructionbutton = $('<button class="instructionbutton" id="instructionbutton">Instructions</button>');
-  // this.$body.append(this.$instructionbutton);
+  this.$container.append(this.$instructionbutton);
   this.$ul    = $('<ul></ul>');
-  this.$body.append(this.$ul);
+  this.$container.append(this.$ul);
+  this.$nextLevel = $('.nextLevelPrompt').hide();
+  this.$gameOver = $('.gameOverPrompt').hide();
   this.createGrid();
-  // this.makeInstructions();
+  this.makeInstructions();
   this.makeStartButton();
   this.makeScore();
 };
@@ -53,21 +56,22 @@ Game.createGrid = function createGrid() {
 };
 
 Game.makeScore = function makeScore() {
-  this.$progress = $('<progress value="20" max="100"></progress>');
+  this.$progress = $('<progress value="30" max="100"></progress>');
   this.$progress.hide();
-  this.$body.append(this.$progress);
+  this.$container.append(this.$progress);
 };
 
-// Game.makeInstructions = function makeInstructionButton() {
-//   this.$instructions = $('#instructions');
-//   this.$instructions.hide();
-//   this.$instructionButton.append(this.$instructions);
-//   this.$instructionButton.on('click', this.showInstructions);
-// };
+Game.makeInstructions = function makeInstructions() {
+  this.$instructions = $('#instructions');
+  this.$instructions.hide();
+  this.$container.append(this.$instructions);
+  this.$instructionbutton.on('click', this.showInstructions);
+  $('#closeinstructions').on('click', this.hideInstructions);
+};
 
 Game.makeStartButton = function makeStartButton() {
   this.$startButton = $('<button class="start">Start</button>');
-  this.$body.append(this.$startButton);
+  this.$container.append(this.$startButton);
   this.$startButton.on('click', this.start.bind(this));
 };
 
@@ -121,9 +125,26 @@ Game.checkType = function checkType() {
     Game.score -= Game.empty;
   }
   Game.$progress.val(Game.score);
-  if (Game.score >= 100) return Game.nextLevel();
-  if (Game.score <= 0) return Game.over();
+  if (Game.score >= 100) return Game.nextLevelPrompt();
+  if (Game.score <= 0) return Game.gameOverPrompt();
 };
+
+Game.nextLevelPrompt = function nextLevelPrompt() {
+  var $nextLevelPrompt = $('.nextLevelPrompt');
+  $nextLevelPrompt.fadeIn(700).delay(5000).fadeOut(700);
+  Game.nextLevel();
+};
+
+Game.gameOverPrompt = function gameOverPrompt() {
+  var $gameOverPrompt = $('.gameOverPrompt');
+  $gameOverPrompt.fadeIn(700);       //.delay(5000).fadeOut(700);
+  Game.over();
+  $('#playAgain').on('click', function() {
+    $gameOverPrompt.fadeOut(200);
+  });
+};
+
+
 
 Game.nextLevel = function() {
   this.stopAllTimeouts();
@@ -176,13 +197,15 @@ Game.stopAllTimeouts = function stopAllTimeouts() {
 };
 
 
-// Game.showInstructions = function showInstructions() {
-//   console.log('clicked');
-//   $('#instructions').show();
+Game.showInstructions = function showInstructions() {
+  console.log('clicked');
+  $('#instructions').show();
 };
-//
-// Game.hideInstructions = function() {
-//   $('.instructions').hide();
-// };
+
+Game.hideInstructions = function hideInstructions() {
+  console.log('clicked close');
+  $('#instructions').hide();
+};
+
 
 $(Game.setup.bind(Game));
