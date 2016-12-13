@@ -34,14 +34,15 @@ Game.buildGame = function buildGame() {
   this.$container = $('.container');
   this.$instructionbutton = $('<button class="instructionbutton" id="instructionbutton">Instructions</button>');
   this.$container.append(this.$instructionbutton);
-  this.$scoreDisplay = $('<p></p>');
+  this.$scoreDisplay = $('<p class="score">0</p>');
   this.$container.append(this.$scoreDisplay);
   this.$ul    = $('<ul></ul>');
   this.$container.append(this.$ul);
   this.$ul.hide();
+  this.$scoreDisplay.hide();
   this.$nextLevel = $('.nextLevelPrompt').hide();
   this.$gameOver = $('.gameOverPrompt').hide();
-  $('#mute-button').on('click', this.muteMusic);
+  $('#mutebutton').on('click', this.muteMusic);
   this.createGrid();
   this.makeInstructions();
   this.makeStartButton();
@@ -83,6 +84,7 @@ Game.makeStartButton = function makeStartButton() {
 
 Game.start = function start() {
   this.$ul.show();
+  this.$scoreDisplay.show();
   this.$startButton.hide();
   this.$progress.show();
   this.placeSquares('goodie');
@@ -137,7 +139,7 @@ Game.checkType = function checkType() {
   Game.$scoreDisplay.html(Game.scoreNumber);
   Game.$progress.val(Game.score);
   if (Game.score >= 100) return Game.nextLevelPrompt();
-  if (Game.score <= 0 && Game.scoreNumer !== '') return Game.gameOverPrompt();
+  if (Game.score <= 0) return Game.gameOverPrompt();
 };
 
 Game.nextLevelPrompt = function nextLevelPrompt() {
@@ -191,7 +193,7 @@ Game.over = function over() {
   this.incorrect   = 50;
   this.empty       = 10;
   this.level       = 1;
-  this.$scoreDisplay.html('');
+  this.$scoreDisplay.html('0');
   this.$progress.val(20);
   this.$progress.hide();
   this.$startButton.show();

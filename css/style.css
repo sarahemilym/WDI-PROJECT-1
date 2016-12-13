@@ -1,6 +1,16 @@
 body {
   text-align: center;
   font-family: 'Bree Serif', serif;
+  background: #CFC9C9;
+}
+
+h1 {
+  color: #7D7474;
+  margin-top: 47px;
+  font-size: 67px;
+  text-align: center;
+  padding: 0;
+  margin-bottom: 7px;
 }
 
 ul {
@@ -8,43 +18,69 @@ ul {
   padding: 0;
   width: 400px;
   height: 400px;
-  border: 1px solid #000;
+  /* background: #A59D9D; */
+  background: #fafafa;
+  border: 3px solid #fafafa;
+  border-radius: 5px;
 }
 
 li {
+  margin: 0 auto;
+  padding: 0;
+  width: 400px;
+  height: 400px;
+  /*background: #A59D9D;*/
+  background: #CFC9C9;
+  border: 3px solid #fafafa;
+  border-radius: 5px;
   list-style-type: none;
   float: left;
-  border: 1px solid #000;
   box-sizing: border-box;
 }
 
 .instructionbutton {
   margin: 20px;
-  background: #009ee2;
-  color: black;
+  background: #7D7474;
+  color: #fafafa;
   padding: 10px 20px;
   font-family: 'Bree Serif', serif;
   border: none;
-  font-size: 20px;
+  font-size: 17px;
+  height: 34px;
+  width: 155px;
+  margin-bottom: 2px;
+  border-radius: 8px;
+  line-height: 10px;
 }
 
 .container {
-  width: 660px;
-  height: 620px;
+  width: 716px;
+  height: 707px;
   position: relative;
-  border: 1px solid black;
+  /* border-radius: 5px; */
   margin: 0 auto;
+  background: #CFC9C9;
+  /* border-radius: 22px; */
+  margin-top: -8px;
+  overflow: auto;
+}
 
+#mutebutton {
+  float: left;
+  margin: 26px;
 }
 
 .instructions {
   border: 1px solid black;
+  border-radius: 5px;
   z-index: 998;
   margin: 83px;
   width: 73%;
   height: 33%;
   position: absolute;
   top: 0;
+  background: rgba(51, 51, 51, 0.8);
+  color: white;
 }
 
 .nextLevelPrompt {
@@ -58,23 +94,43 @@ li {
 }
 
 .gameOverPrompt {
-  border: 1px solid black;
   z-index: 998;
   margin: 83px;
   width: 73%;
   height: 33%;
   position: absolute;
   top: 0;
+  background: rgba(80, 70, 70, 0.8);;
+  color: #CFC9C9;
+  border-radius: 5px;
 }
 
 .start {
   margin: 20px;
-  background: #fffa2a;
-  color: black;
+  background: #84E2DF;
+  color: #7D7474;
   padding: 10px 20px;
   font-family: 'Bree Serif', serif;
   border: none;
-  font-size: 20px;
+  font-size: 32px;
+  height: 70px;
+  width: 157px;
+  line-height: 8px;
+  border-radius: 8px;
+  border: 7px solid #7D7474;
+}
+
+.playAgain {
+  border-radius: 5px;
+  background: #FFFBFB;
+  color: #A59D9D;
+  border: none;
+}
+
+.score {
+  font-size: 23px;
+  padding: -10px;
+  margin: 13px;
 }
 
 progress {
@@ -90,6 +146,10 @@ progress[value] {
   height: 20px;
 }
 
+/*progress::-moz-progress-bar {
+background: #0063a6;
+}*/
+
 progress[value]::-webkit-progress-bar {
   background-color: #eee;
   border-radius: 2px;
@@ -97,23 +157,25 @@ progress[value]::-webkit-progress-bar {
 }
 
 progress[value]::-webkit-progress-value {
-  background-image:
-	   -webkit-linear-gradient(-45deg,
-	                           transparent 33%, rgba(0, 0, 0, .1) 33%,
-	                           rgba(0,0, 0, .1) 66%, transparent 66%),
-	   /*-webkit-linear-gradient(top,
-	                           rgba(255, 255, 255, .25),
-	                           rgba(0, 0, 0, .25)),*/
-	   -webkit-linear-gradient(left, red, yellow, green);
+  background-color: red;
 
-    border-radius: 2px;
-    background-size: 35px 20px, 100% 100%, 100% 100%;
+  /*background-image:
+  /*-webkit-linear-gradient(-45deg,
+  transparent 33%, rgba(0, 0, 0, .1) 33%,
+  rgba(0,0, 0, .1) 66%, transparent 66%),*/
+  /*-webkit-linear-gradient(top,
+  rgba(255, 255, 255, .25),
+  rgba(0, 0, 0, .25)),
+  -webkit-linear-gradient(left, red, yellow, green);*/
+
+  border-radius: 5px;
+  /*background-size: 35px 20px, 100% 100%, 100% 100%;*/
 }
 
 .goodie {
-  background: green;
+  background: #84E2DF;
 }
 
 .baddie {
-  background: red;
+  background: #D81159;
 }

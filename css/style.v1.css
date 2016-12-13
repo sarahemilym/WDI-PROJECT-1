@@ -57,3 +57,30 @@ button {
   clear: both;
   width: 419px;
 }
+
+
+
+
+
+
+
+ul {
+  margin: 0 auto;
+  padding: 0;
+  width: 400px;
+  height: 400px;
+  /*background: #A59D9D;*/
+  background: #fafafa;
+  border: 3px solid #fafafa;
+  border-radius: 5px;
+}
+
+li {
+  list-style-type: none;
+  float: left;
+  border: 3px solid #fafafa;
+  border-radius: 5px;
+  box-sizing: border-box;
+  /*background: #7D7474;*/
+  background: #CFC9C9;
+}
