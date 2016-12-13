@@ -66,15 +66,6 @@ li {
   position: absolute;
   top: 0;
 }
-/*.innerdiv {
-border: 3px solid black;
-background: red;
-width: 300px;
-position: absolute;
-z-index: 10;
-top: 30px;
-left: 50px
-}*/
 
 .start {
   margin: 20px;
@@ -91,10 +82,38 @@ progress {
   margin: 20px auto;
 }
 
+progress[value] {
+  -webkit-appearance: none;
+  appearance: none;
+
+  width: 250px;
+  height: 20px;
+}
+
+progress[value]::-webkit-progress-bar {
+  background-color: #eee;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+progress[value]::-webkit-progress-value {
+  background-image:
+	   -webkit-linear-gradient(-45deg,
+	                           transparent 33%, rgba(0, 0, 0, .1) 33%,
+	                           rgba(0,0, 0, .1) 66%, transparent 66%),
+	   /*-webkit-linear-gradient(top,
+	                           rgba(255, 255, 255, .25),
+	                           rgba(0, 0, 0, .25)),*/
+	   -webkit-linear-gradient(left, red, yellow, green);
+
+    border-radius: 2px;
+    background-size: 35px 20px, 100% 100%, 100% 100%;
+}
+
 .goodie {
-  background-image: '../images/good.bacteria.png';
+  background: green;
 }
 
 .baddie {
-  background: #c90019;
+  background: red;
 }

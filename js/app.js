@@ -12,17 +12,18 @@
 var Game = Game || {};
 
 Game.setup = function setup() {
-  this.width     = 400;
-  this.base      = 4;
-  this.maxTime   = 2000;
-  this.minTime   = 1000;
-  this.baddies   = 2;
-  this.goodies   = 4;
-  this.score     = 0;
-  this.correct   = 30;
-  this.incorrect = 20;
-  this.empty     = 10;
-  this.level     = 1;
+  this.width       = 400;
+  this.base        = 4;
+  this.maxTime     = 2000;
+  this.minTime     = 1000;
+  this.baddies     = 2;
+  this.goodies     = 4;
+  this.score       = 0;
+  this.scoreNumber = 0;
+  this.correct     = 10;
+  this.incorrect   = 5;
+  this.empty       = 2;
+  this.level       = 1;
   this.buildGame();
 };
 
@@ -33,14 +34,19 @@ Game.buildGame = function buildGame() {
   this.$container = $('.container');
   this.$instructionbutton = $('<button class="instructionbutton" id="instructionbutton">Instructions</button>');
   this.$container.append(this.$instructionbutton);
+  this.$scoreDisplay = $('<p></p>');
+  this.$container.append(this.$scoreDisplay);
   this.$ul    = $('<ul></ul>');
   this.$container.append(this.$ul);
+  this.$ul.hide();
   this.$nextLevel = $('.nextLevelPrompt').hide();
   this.$gameOver = $('.gameOverPrompt').hide();
+  $('#mute-button').on('click', this.muteMusic);
   this.createGrid();
   this.makeInstructions();
   this.makeStartButton();
   this.makeScore();
+  this.muteMusic();
 };
 
 Game.createGrid = function createGrid() {
@@ -76,6 +82,7 @@ Game.makeStartButton = function makeStartButton() {
 };
 
 Game.start = function start() {
+  this.$ul.show();
   this.$startButton.hide();
   this.$progress.show();
   this.placeSquares('goodie');
@@ -116,22 +123,26 @@ Game.randomIndex = function randomIndex() {
 
 Game.checkType = function checkType() {
   if ($(this).hasClass('goodie')) {
+    new Audio('../sounds/ping.mp3').play();
+    Game.scoreNumber +=5;
     Game.score += Game.correct;
     $(this).removeClass('goodie');
   } else if ($(this).hasClass('baddie')) {
     Game.score -= Game.incorrect;
     $(this).removeClass('baddie');
   } else {
+    Game.scoreNumber -=2;
     Game.score -= Game.empty;
   }
+  Game.$scoreDisplay.html(Game.scoreNumber);
   Game.$progress.val(Game.score);
   if (Game.score >= 100) return Game.nextLevelPrompt();
-  if (Game.score <= 0) return Game.gameOverPrompt();
+  if (Game.score <= 0 && Game.scoreNumer !== '') return Game.gameOverPrompt();
 };
 
 Game.nextLevelPrompt = function nextLevelPrompt() {
   var $nextLevelPrompt = $('.nextLevelPrompt');
-  $nextLevelPrompt.fadeIn(700).delay(5000).fadeOut(700);
+  $nextLevelPrompt.fadeIn(700).delay(500).fadeOut(700);
   Game.nextLevel();
 };
 
@@ -168,17 +179,19 @@ Game.over = function over() {
   this.stopAllTimeouts();
   this.removeGoodieBaddieClass('goodie');
   this.removeGoodieBaddieClass('baddie');
-  this.width     = 400;
-  this.base      = 4;
-  this.maxTime   = 2000;
-  this.minTime   = 1000;
-  this.baddies   = 2;
-  this.goodies   = 4;
-  this.score     = 0;
-  this.correct   = 10;
-  this.incorrect = 50;
-  this.empty     = 10;
-  this.level     = 1;
+  this.width       = 400;
+  this.base        = 4;
+  this.maxTime     = 2000;
+  this.minTime     = 1000;
+  this.baddies     = 2;
+  this.goodies     = 4;
+  this.score       = 0;
+  this.scoreNumber = 0;
+  this.correct     = 10;
+  this.incorrect   = 50;
+  this.empty       = 10;
+  this.level       = 1;
+  this.$scoreDisplay.html('');
   this.$progress.val(20);
   this.$progress.hide();
   this.$startButton.show();
@@ -203,9 +216,18 @@ Game.showInstructions = function showInstructions() {
 };
 
 Game.hideInstructions = function hideInstructions() {
-  console.log('clicked close');
+
   $('#instructions').hide();
 };
 
+Game.muteMusic = function muteMusic() {
+  console.log('clicked');
+  // $('audio').each(function() {
+  //   $(this).pause();
+  // });
+  // $('audio').each(function(){
+  // $(this).volume = 0.0;
+
+};
 
 $(Game.setup.bind(Game));
