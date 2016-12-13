@@ -1,150 +1,188 @@
-// leaderboard - when user types in name it is stored in the leaderboard
-// object for the leader board
-// {playerName: $('textarea'),
-//  leaderBoardScore: 'score'}
-
-// if name === name and their leaderboard score is more than the current score,
-// then leaderBoardScore.val is current score
-
-// make the timer go red from 5 seconds..
-
-// if ($('timer').val() =< 5){
-//   $('.timertext').css('color', 'red');   see below for flash
-// } else {
-//   $('.timertext').css('color', '#8899a6');
-// }
-
-
-// flashing text (something like this)
-// function flash() {
-//     var text = document.getElementById('foo');
-//     text.style.color = (text.style.color=='red') ? 'green':'red';
-// }
-// var clr = setInterval(flash, 1000);
-
-
-// Basic game code
-
-// create a 4X4 grid
-
-// computer chooses sequence at random
-
-// either object x(blue for now), or object y(red for now)
-
-// event listeners - if x clicked scorecounter++ if y clicked scorecounter-5
-
-// display score in #score-counter
-
-// display timer, when timer gets to 0 alert that round is over
-
-// $(start);
-//
-// function start() {
+// Build a grid (of n size, starting at 4)
+// When you click a start button
+// Begin flashing squares using two colors
+// - Good
+// - Bad
+// If you click the good square, your health bar increases
+// If you click the bad square, your health bar decreases
+// When you reach the top of the health bar, you move onto the next level
+// Click the start button to begin the new level
+// A higher level has smaller squares and more bad squares
 
 var Game = Game || {};
 
-Game.sequenceGood       = [];
-Game.sequenceBad        = [];
-Game.gridBase           = 4;
-Game.sequenceGoodLength = 4;
-Game.sequenceBadLength  = 2;
-Game.width              = 400;
-Game.score              = 0;
-Game.squares            = [];
-Game.sequenceArray      = [];
+Game.setup = function setup() {
+  this.width     = 400;
+  this.base      = 4;
+  this.maxTime   = 2000;
+  this.minTime   = 1000;
+  this.baddies   = 2;
+  this.goodies   = 4;
+  this.score     = 0;
+  this.correct   = 10;
+  this.incorrect = 50;
+  this.empty     = 10;
+  this.level     = 1;
+  this.buildGame();
+};
 
+Game.buildGame = function buildGame() {
+  this.$body  = $('body');
+  this.$title = $('<h1>ClickyNess</h1>');
+  this.$body.append(this.$title);
+  this.$instructionbutton = $('<button class="instructionbutton" id="instructionbutton">Instructions</button>');
+  // this.$body.append(this.$instructionbutton);
+  this.$ul    = $('<ul></ul>');
+  this.$body.append(this.$ul);
+  this.createGrid();
+  // this.makeInstructions();
+  this.makeStartButton();
+  this.makeScore();
+};
 
-// create a 4X4 grid
-Game.createGrid = function() {
-  var body = document.getElementsByTagName('body')[0];
-  var grid = document.createElement('ul');
-  body.appendChild(grid);
-  for (var i = 0; i < Game.gridBase*Game.gridBase; i++) {
-    var square = document.createElement('li');
-    square.style.width = Game.width / Game.gridBase + 'px';
-    square.style.height = Game.width / Game.gridBase + 'px';
-    grid.appendChild(square);
-    Game.sequenceArray.push(i);
+Game.createGrid = function createGrid() {
+  this.$ul.empty();
+  var i = 0;
+  for (i; i < this.base * this.base; i++) {
+    var li = $('<li></li>');
+    li.css('width', this.width/this.base + 'px');
+    li.css('height', this.width/this.base + 'px');
+    this.$ul.append(li);
   }
-  Game.squares = $('li');
-  Game.chooseGoodSequence();
-  Game.chooseBadSequence();
+  this.$lis = $('li');
 };
 
-Game.chooseGoodSequence = function() {
-  setInterval(function() {
-    if ($('.lightgood').length < 4) {
-      var randomIndex = Game.randomSequence();
-      var randomGood = Game.sequenceGood.push(Game.sequenceArray[randomIndex]);
-      Game.sequenceArray.splice(randomIndex, 1);
-      $(Game.squares[randomGood]).attr('class', 'lightgood');
-      setTimeout(function() {
-        $(Game.squares[randomGood]).removeAttr('class', 'lightgood');
-      }, 2000);
-    }
-  }, 500);
-  Game.lightsClicked();
+Game.makeScore = function makeScore() {
+  this.$progress = $('<progress value="20" max="100"></progress>');
+  this.$progress.hide();
+  this.$body.append(this.$progress);
 };
 
-Game.chooseBadSequence = function() {
-  setInterval(function() {
-    if ($('.lightbad').length < 2) {
-      var randomIndex = Game.randomSequence();
-      var randomBad = Game.sequenceBad.push(Game.sequenceArray[randomIndex]);
-      Game.sequenceArray.splice(randomIndex, 1);
-      $(Game.squares[randomBad]).attr('class', 'lightbad');
-      setTimeout(function() {
-        $(Game.squares[randomBad]).removeAttr('class', 'lightbad');
-      }, 2000);
-    }
-  }, 500);
-  Game.lightsClicked();
-};
-
-Game.randomSequence = function() {
-  return Math.floor(Math.random() * Game.sequenceArray.length);
-};
-
-
-// if ($('timer').val() =< 5){
-//   $('.timertext').css('color', 'red');   see below for flash
-// } else {
-//   $('.timertext').css('color', '#8899a6');
-// }
-
-
-// Game.lightUpBad = function() {
-//   for (var i = 0; i < Game.sequenceBad.length; i++) {
-//     Game.squares[Game.sequenceBad[i]].setAttribute('class', 'lightbad');
-//   }
-//   Game.lightsClicked();
+// Game.makeInstructions = function makeInstructionButton() {
+//   this.$instructions = $('#instructions');
+//   this.$instructions.hide();
+//   this.$instructionButton.append(this.$instructions);
+//   this.$instructionButton.on('click', this.showInstructions);
 // };
 
-Game.lightsClicked = function() {
-  for (var i = 0; i < Game.squares.length; i++) {
-    Game.squares[i].addEventListener('click', goodOrBad);
+Game.makeStartButton = function makeStartButton() {
+  this.$startButton = $('<button class="start">Start</button>');
+  this.$body.append(this.$startButton);
+  this.$startButton.on('click', this.start.bind(this));
+};
+
+Game.start = function start() {
+  this.$startButton.hide();
+  this.$progress.show();
+  this.placeSquares('goodie');
+  this.placeSquares('baddie');
+  this.$ul.off('click', 'li', this.checkType);
+  this.$ul.on('click', 'li', this.checkType);
+};
+
+Game.placeSquares = function placeSquares(type) {
+  var i = 0;
+  var n = (type === 'goodie') ? this.goodies : this.baddies;
+  for (i; i < n; i++) {
+    this.chooseRandomSquare(type);
   }
 };
 
-function goodOrBad() {
-  var display = document.querySelector('#score-counter');
-  console.log('clicked');
-  if (this.className === 'lightgood') {
-    Game.score+=2;
-    $(this.removeAttribute('class', 'lightgood'));
-  } else if (this.className === 'lightbad') {
-    Game.score-=5;
-    this.removeAttribute('class', 'lightbad');
+Game.chooseRandomSquare = function chooseRandomSquare(type) {
+  var initialRandomIndex = this.randomIndex();
+  var $li = $(this.$lis[initialRandomIndex]);
+  if ($li.hasClass('goodie') || $li.hasClass('baddie')) {
+    return this.chooseRandomSquare(type);
   } else {
-    Game.score--;
+    $li.addClass(type);
+    window.setTimeout(function() {
+      $li.removeClass(type);
+      Game.chooseRandomSquare(type);
+    }, this.randomIntFromInterval(this.minTime, this.maxTime));
   }
-  display.innerHTML = Game.score;
-}
+};
 
+Game.randomIntFromInterval = function randomIntFromInterval(min,max) {
+  return Math.floor(Math.random()*(max-min+1)+min);
+};
 
-Game.start = function() {
-  $('#start').on('click', Game.createGrid);
+Game.randomIndex = function randomIndex() {
+  return Math.floor(Math.random() * this.$lis.length);
+};
+
+Game.checkType = function checkType() {
+  if ($(this).hasClass('goodie')) {
+    Game.score += Game.correct;
+    $(this).removeClass('goodie');
+  } else if ($(this).hasClass('baddie')) {
+    Game.score -= Game.incorrect;
+    $(this).removeClass('baddie');
+  } else {
+    Game.score -= Game.empty;
+  }
+  Game.$progress.val(Game.score);
+  if (Game.score >= 100) return Game.nextLevel();
+  if (Game.score <= 0) return Game.over();
+};
+
+Game.nextLevel = function() {
+  this.stopAllTimeouts();
+  this.removeGoodieBaddieClass('goodie');
+  this.removeGoodieBaddieClass('baddie');
+  this.base      += 1;
+  this.maxTime   -= 50;
+  this.minTime   -= 50;
+  this.level     += 1;
+  if (this.level % 3 === 0) {
+    this.baddies   += 2;
+  }
+  this.score     = 0;
+  this.$progress.val(20);
+  this.$progress.hide();
+  this.$startButton.show();
+  this.createGrid();
+};
+
+Game.over = function over() {
+  this.stopAllTimeouts();
+  this.removeGoodieBaddieClass('goodie');
+  this.removeGoodieBaddieClass('baddie');
+  this.width     = 400;
+  this.base      = 4;
+  this.maxTime   = 2000;
+  this.minTime   = 1000;
+  this.baddies   = 2;
+  this.goodies   = 4;
+  this.score     = 0;
+  this.correct   = 10;
+  this.incorrect = 50;
+  this.empty     = 10;
+  this.level     = 1;
+  this.$progress.val(20);
+  this.$progress.hide();
+  this.$startButton.show();
+  this.createGrid();
+};
+
+Game.removeGoodieBaddieClass = function removeGoodieBaddieClass(type) {
+  $('ul .' + type).removeClass(type);
+};
+
+Game.stopAllTimeouts = function stopAllTimeouts() {
+  var id = setTimeout(function() {}, 0);
+  while (id--) {
+    clearTimeout(id);
+  }
 };
 
 
-document.addEventListener('DOMContentLoaded', Game.start);
+// Game.showInstructions = function showInstructions() {
+//   console.log('clicked');
+//   $('#instructions').show();
+};
+//
+// Game.hideInstructions = function() {
+//   $('.instructions').hide();
+// };
+
+$(Game.setup.bind(Game));

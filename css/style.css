@@ -1,5 +1,10 @@
+body {
+  text-align: center;
+  font-family: 'Bree Serif', serif;
+}
+
 ul {
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   width: 400px;
   height: 400px;
@@ -13,14 +18,36 @@ li {
   box-sizing: border-box;
 }
 
-.lightgood {
-  background-color: yellow;
+.instructionbutton {
+  margin: 20px;
+  background: #009ee2;
+  color: black;
+  padding: 10px 20px;
+  font-family: 'Bree Serif', serif;
+  border: none;
+  font-size: 20px;
+  }
+
+
+.start {
+  margin: 20px;
+  background: #fffa2a;
+  color: black;
+  padding: 10px 20px;
+  font-family: 'Bree Serif', serif;
+  border: none;
+  font-size: 20px;
 }
 
-.lightbad {
-  background-color: red;
+progress {
+  display: block;
+  margin: 20px auto;
 }
 
-button {
-  border: 1px solid black;
+.goodie {
+  background: #009ee2;
+}
+
+.baddie {
+  background: #c90019;
 }

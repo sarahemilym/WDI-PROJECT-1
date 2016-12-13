@@ -1,0 +1,59 @@
+ul {
+  margin: 0;
+  padding: 0;
+  width: 400px;
+  height: 400px;
+  border: 1px solid #000;
+}
+
+li {
+  list-style-type: none;
+  float: left;
+  border: 1px solid #000;
+  box-sizing: border-box;
+  width: 98px;
+  height: 98px;
+}
+
+.lightgood {
+  background-color: yellow;
+}
+
+.lightbad {
+  background-color: red;
+}
+
+button {
+  border: 1px solid black;
+}
+
+.good {
+  background: blue;
+}
+
+.bad {
+  background: red;
+}
+
+.healthchekcer {
+  display: block;
+}
+
+/*.health {
+  display: block;
+  border: 1px solid black;
+  height: 60px;
+  width: 20px;
+  margin: 0;
+  clear: both;
+}*/
+
+.healthbar {
+  display: inline;
+  margin: 50px;
+}
+
+#health {
+  clear: both;
+  width: 419px;
+}
