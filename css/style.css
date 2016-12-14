@@ -1,6 +1,6 @@
 body {
   text-align: center;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rubik', sans-serif;
   background: #CFC9C9;
 }
 
@@ -46,7 +46,7 @@ li {
   height: 21px;
   width: 88px;
   margin-top: 12px;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rubik', sans-serif;
   font-size: 12px;
 }
 
@@ -55,7 +55,7 @@ li {
   background: #7D7474;
   color: #fafafa;
   padding: 10px 20px;
-  font-family: 'Bree Serif', serif;
+  font-family: 'Rubik', sans-serif;
   border: none;
   font-size: 17px;
   height: 34px;
@@ -70,24 +70,22 @@ li {
   width: 716px;
   height: 707px;
   position: relative;
-  /* border-radius: 5px; */
   margin: 0 auto;
   background: #CFC9C9;
-  /* border-radius: 22px; */
   margin-top: -8px;
   overflow: auto;
 }
 
 .instructions {
-    border-radius: 11px;
-    z-index: 998;
-    margin: 108px 0 0 94px;
-    width: 73%;
-    height: 55%;
-    position: absolute;
-    background: rgba(36, 27, 27, 0.8);
-    color: #fafafa;
-    font-size: 16px;
+  border-radius: 11px;
+  z-index: 998;
+  margin: 108px 0 0 94px;
+  width: 73%;
+  height: 55%;
+  position: absolute;
+  background: rgba(36, 27, 27, 0.8);
+  color: #fafafa;
+  font-size: 16px;
 }
 
 .bluesquares {
@@ -117,6 +115,7 @@ li {
   border-radius: 10px;
   top: 0;
   background: rgba(80, 70, 70, 0.95);
+  font-family: 'Rubik', sans-serif;
   /*color: #84E2DF;
   font-size: 40px;
   line-height: 86px;*/
@@ -126,6 +125,7 @@ li {
   color: #84E2DF;
   font-size: 40px;
   line-height: 86px;
+  font-family: 'Rubik', sans-serif;
 }
 
 .gameOverPrompt h2 {
@@ -133,6 +133,7 @@ li {
   font-size: 40px;
   line-height: 86px;
   margin: 10px;
+  font-family: 'Rubik', sans-serif;
 }
 
 
@@ -141,7 +142,7 @@ li {
   background: #84E2DF;
   color: #7D7474;
   padding: 13px 20px;
-  font-family: 'Bree Serif', serif;
+  font-family: 'Rubik', sans-serif;
   border: none;
   font-size: 32px;
   height: 70px;
@@ -152,33 +153,34 @@ li {
 }
 
 .playAgain {
-    border-radius: 5px;
-    color: #fafafa;
-    margin: -20px;
-    background: none;
-    font-size: 17px;
-    font-family: 'Raleway', sans-serif;
-    height: 40px;
-    width: 116px;
-    border: 1px solid #fafafa;
+  border-radius: 5px;
+  color: #fafafa;
+  margin: -20px;
+  background: none;
+  font-size: 17px;
+  font-family: 'Rubik', sans-serif;
+  height: 40px;
+  width: 116px;
+  border: 1px solid #fafafa;
 }
 
 .closeinstructions {
-    border-radius: 5px;
-    color: #fafafa;
-    margin: -20px;
-    background: none;
-    font-size: 12px;
-    font-family: 'Raleway', sans-serif;
-    height: 27px;
-    width: 119px;
-    border: 1px solid #fafafa;
+  border-radius: 5px;
+  color: #fafafa;
+  margin: -20px;
+  background: none;
+  font-size: 12px;
+  font-family: 'Rubik', sans-serif;
+  height: 27px;
+  width: 119px;
+  border: 1px solid #fafafa;
 }
 
 .score {
   font-size: 23px;
   padding: -10px;
   margin: 13px;
+  font-family: 'Rubik', sans-serif;
 }
 
 progress {
