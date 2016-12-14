@@ -1,6 +1,6 @@
 body {
   text-align: center;
-  font-family: 'Bree Serif', serif;
+  font-family: 'Raleway', sans-serif;
   background: #CFC9C9;
 }
 
@@ -46,7 +46,7 @@ li {
   height: 21px;
   width: 88px;
   margin-top: 12px;
-  font-family: font-family: 'Bree Serif', serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 12px;
 }
 
@@ -157,7 +157,7 @@ li {
     margin: -20px;
     background: none;
     font-size: 17px;
-    font-family: font-family: 'Bree Serif', serif;
+    font-family: 'Raleway', sans-serif;
     height: 40px;
     width: 116px;
     border: 1px solid #fafafa;
@@ -169,7 +169,7 @@ li {
     margin: -20px;
     background: none;
     font-size: 12px;
-    font-family: font-family: 'Bree Serif', serif;
+    font-family: 'Raleway', sans-serif;
     height: 27px;
     width: 119px;
     border: 1px solid #fafafa;
