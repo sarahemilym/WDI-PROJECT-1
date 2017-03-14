@@ -29,7 +29,7 @@ Game.setup = function setup() {
 
 Game.buildGame = function buildGame() {
   this.$body  = $('body');
-  this.$title = $('<h1>ClickyNess</h1>');
+  this.$title = $('<h1>Klick It!</h1>');
   this.$body.prepend(this.$title);
   this.$container = $('.container');
   this.$instructionbutton = $('<button class="instructionbutton" id="instructionbutton">Instructions</button>');
